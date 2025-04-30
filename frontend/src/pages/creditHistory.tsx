@@ -7,6 +7,10 @@ interface CreditHistoryEntry {
   createdAt: string;
 }
 
+interface s {
+  creditHistory : CreditHistoryEntry[]
+}
+
 export default function CreditHistoryPage() {
   const [creditHistory, setCreditHistory] = useState<CreditHistoryEntry[]>([]);
   const [totalCredits, setTotalCredits] = useState<number>(0);
@@ -15,7 +19,7 @@ export default function CreditHistoryPage() {
     const fetchCreditHistory = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3000/api/info/getcredithistory", {
+        const res = await axios.get<s>("http://localhost:3000/api/info/getcredithistory", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -26,7 +26,7 @@ const Feed = () => {
   const handleAction = async (action: 'like' | 'save' | 'report', postId: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:3000/api/posts/action`,
         { postId, action },
         {

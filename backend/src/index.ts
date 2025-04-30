@@ -23,3 +23,14 @@ app.use("/api/posts" , postRoutes)
 app.listen(3000, () => {
   console.log("Express server listening on port 3000");
 });
+
+// serve frontend in production
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.get('*', (_, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
+

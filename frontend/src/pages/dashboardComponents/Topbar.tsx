@@ -18,7 +18,7 @@ export default function Topbar() {
   const fetchUserDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/api/info/getme", {
+      const res = await axios.get<{user : User}>("http://localhost:3000/api/info/getme", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data.user);

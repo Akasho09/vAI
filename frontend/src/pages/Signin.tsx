@@ -7,39 +7,27 @@ import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+interface s {
+  token : string 
+}
+
+export const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user"); // default role
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-xl bg-white rounded-lg shadow-md p-8">
-        <Heading label="Sign up" />
-        <div className="sm:flex items-center justify-center hidden">
-        <SubHeading label="Enter your information to create an account" />
-        
-        </div>
-        <div className="md:flex gap-4 mt-4">
-          <InputBox
-            onChange={(e:any) => setFirstName(e.target.value)}
-            placeholder="Akash"
-            label="First Name"
-            type="text"
-          />
-          <InputBox
-            onChange={(e:any) => setLastName(e.target.value)}
-            placeholder="Ahmad"
-            label="Last Name"
-            type="text"
-          />
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+        <Heading label="Sign in" />
+        <div className="sm:flex hidden items-center justify-center">
+          <SubHeading label="Enter your credentials to access your account" />
         </div>
 
         <div className="mt-4">
           <InputBox
-            onChange={(e:any) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Akash09"
             label="Username"
             type="text"
@@ -48,36 +36,51 @@ export const Signup = () => {
 
         <div className="mt-4">
           <InputBox
-            onChange={(e:any) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="123456"
             label="Password"
             type="password"
           />
         </div>
 
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+          <select
+            className="w-full p-2 border border-gray-300 rounded-md"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
         <div className="mt-6">
           <Button
+            label="Sign in"
             onClick={async () => {
               try {
-                const response = await axios.post("http://localhost:3000/api/user/signup", {
+                const response = await axios.post<s>("http://localhost:3000/api/user/signin", {
                   username,
-                  firstname: firstName,
-                  lastname: lastName,
-                  password
+                  password,
+                  role
                 });
                 localStorage.setItem("token", response.data.token);
-                navigate("/dashboard");
+                navigate(role === "user" ? "/dashboard" : "/admindashboard");
               } catch (error) {
                 console.error(error);
-                alert(error)
+                alert(error) /// fix to exact error 
               }
             }}
-            label="Sign up"
           />
         </div>
 
         <div className="mt-4">
-          <BottomWarning label="Already have an account?" buttonText="Sign in" to="/signin" />
+          <BottomWarning
+            label="Don't have an account?"
+            buttonText="Sign up"
+            to="/signup"
+          />
         </div>
       </div>
     </div>

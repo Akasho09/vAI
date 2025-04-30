@@ -52,7 +52,6 @@ interface UserProfile {
 
 export default function ProfilePage() {
   const navigate = useNavigate();
-  const [user, setUser] = useState<UserProfile | null>(null);
   const [formData, setFormData] = useState<UserProfile>({
     firstname: "",
     lastname: "",
@@ -70,10 +69,9 @@ export default function ProfilePage() {
       try {
         setIsLoading(true);
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/api/info/getme", {
+        const response = await axios.get<{ user: UserProfile }>("http://localhost:3000/api/info/getme", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data.user);
         setFormData(response.data.user); // Initialize form fields with user data
       } catch (error) {
         console.error("Error fetching user details:", error);
