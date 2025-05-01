@@ -3,7 +3,7 @@ import axios from "axios";
 export default async function getPosts() {
   try {
     const token = localStorage.getItem("token")
-    const res = await axios.get("http://localhost:3000/api/posts/getposts", {
+    const res = await axios.get<any>("http://localhost:3000/api/posts/getposts", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

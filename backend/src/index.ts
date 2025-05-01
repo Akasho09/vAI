@@ -1,36 +1,68 @@
-import express from "express";
-import bodyParser from "body-parser";
-import authroutes from "./routes/user";
-import infoRouter from "./routes/info"
-import postRoutes from'./routes/posts' 
-import dotenv from 'dotenv';
+import express, { Request, Response } from "express";
+import authRoutes from "./routes/user";
+import infoRouter from "./routes/info";
+import postRoutes from "./routes/posts";
+import dotenv from "dotenv";
+import path from "path";
+import cors from "cors";
+
+// Load environment variables first
 dotenv.config();
 
-import cors from 'cors' 
-
 const app = express();
-app.use(cors())
+
+// Security and performance middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  credentials: true
+}));
+
+// Body parsing (express.json() is sufficient in modern Express)
 app.use(express.json());
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/", async (req, res) => {
-  res.json({ message: "Server is up and running!" });
-});
+// Remove redundant bodyParser (express.json() replaces it)
+// app.use(bodyParser.json()); // ❌ Redundant
 
-app.use("/api/info" , infoRouter)
-app.use("/api/user", authroutes);
-app.use("/api/posts" , postRoutes)
-app.listen(3000, () => {
-  console.log("Express server listening on port 3000");
-});
+// Static files with cache control
+// const staticOptions = {
+//   maxAge: process.env.NODE_ENV === 'production' ? '1y' : '0'
+// };
+// app.use(express.static(path.join(__dirname, "public"), staticOptions));
 
-// serve frontend in production
-// import path from 'path';
-// import { fileURLToPath } from 'url';
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.get('*', (_, res) => {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// API routes
+app.use("/api/info", infoRouter);
+app.use("/api/user", authRoutes);  // Fixed typo: authroutes → authRoutes
+app.use("/api/posts", postRoutes);
+
+// // Health check endpoint (better for monitoring)
+// app.get("/health", (req: Request, res: Response) => {
+//   res.status(200).json({ 
+//     status: "healthy",
+//     timestamp: new Date().toISOString() 
+//   });
 // });
 
+// // Root endpoint
+app.get("/", (req: Request, res: Response) => {
+  res.json({ 
+    message: "Server is running"
+    });
+});
+
+// // SPA fallback (should be after all other routes)
+// app.get("*", (req: Request, res: Response) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
+
+// // Error handling middleware (add this after all routes)
+// app.use((err: Error, req: Request, res: Response) => {
+//   console.error(err.stack);
+//   res.status(500).json({ error: "Internal Server Error" });
+// });
+
+const PORT = Number(process.env.PORT) || 3000;
+app.listen(PORT, '0.0.0.0' , () => {
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode`);
+  console.log(`Listening on port ${PORT}`);
+});
