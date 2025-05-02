@@ -84,6 +84,7 @@ cd vAI
 # 2. Configure environment
 cp .env.example .env
 # Add your MongoDB Atlas URI to .env
+# FORMAT = mongodb+srv://<username>:<password>@cluster0.mongodb.net/creator_dashboard?retryWrites=true&w=majority
 
 # 3. Build and launch
 docker-compose build
@@ -112,7 +113,7 @@ npm install
 npm start
 ``` 
 
-## 📥 Load Sample Posts into Database  [EXTRA]
+## 📥 Load Sample Posts into your Personal Database  [EXTRA]
 
 To fetch and save random posts from Reddit or Twitter into your database:
 
@@ -162,6 +163,3 @@ To access the admin page, use the following credentials:
 Username: akash
 
 Password: akash
-
-
-
