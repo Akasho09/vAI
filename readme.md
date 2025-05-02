@@ -108,6 +108,8 @@ cd frontend
 npm install
 npm start
 
+```
+
 
 ## 📥 Load Sample Posts into Database  [EXTRA]
 
@@ -117,13 +119,13 @@ To fetch and save random posts from Reddit or Twitter into your database:
 
 ```bash
    vAI/backend/src/utils/posts.ts
-```
 Open the file and uncomment the fetchAndStorePosts() function:
 
 // fetchAndStorePosts(); // or fetchAndSaveTwitterPosts();
 
 npx ts-node backend/src/utils/posts.ts 
 
+```
 
 ## 🛠️ Tech Stack
 
