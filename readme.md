@@ -95,9 +95,12 @@ Frontend: http://localhost:5173
 
 Backend API: http://localhost:3000
 
+```
+
 
 ## 🧪 Local Development (Without Docker)
 
+```bash
 # Backend
 cd backend
 npm install
@@ -107,9 +110,7 @@ npm run dev
 cd frontend
 npm install
 npm start
-
-```
-
+``` 
 
 ## 📥 Load Sample Posts into Database  [EXTRA]
 
