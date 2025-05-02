@@ -1,6 +1,16 @@
-// import axios from 'axios';
 import prisma from '../db/index';
+export async function fetchPosts() {
+  try {
+    const data = await prisma.post.findMany();
+    return data;
+  } catch (err: any) {
+    console.error('Error storing posts:', err.message);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
 
+// import axios from 'axios';
 // // Define types for posts
 // interface Post {
 //   title: string;
@@ -67,13 +77,3 @@ import prisma from '../db/index';
     // console.log(`${allPosts.length} posts inserted into DB.`);
     // return allPosts
 
-export async function fetchPosts() {
-  try {
-    const data = await prisma.post.findMany();
-    return data;
-  } catch (err: any) {
-    console.error('Error storing posts:', err.message);
-  } finally {
-    await prisma.$disconnect();
-  }
-}

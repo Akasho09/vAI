@@ -17,7 +17,7 @@ export default async function getPosts(): Promise<Post[]> {
 
     const res = await axios.get<{ posts: Post[] }>(`${backendUrl}/api/posts/getposts`, {
       headers: {
-        Authorization: `Bearer ${token || ""}`,
+        Authorization: `${token || ""}`,
       },
     });
 

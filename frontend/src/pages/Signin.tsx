@@ -7,10 +7,6 @@ import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-interface s {
-  token : string 
-}
-
 export const Signin = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [username, setUsername] = useState("");
@@ -57,24 +53,29 @@ export const Signin = () => {
         </div>
 
         <div className="mt-6">
-          <Button
-            label="Sign in"
-            onClick={async () => {
-              try {
-                const response = await axios.post<s>(`${backendUrl}/api/user/signin`, {
-                  username,
-                  password,
-                  role
-                });
-                localStorage.setItem("token", response.data.token);
-                navigate(role === "user" ? "/dashboard" : "/admindashboard");
-              } catch (error) {
-                console.error(error);
-                alert(error) /// fix to exact error 
-              }
-            }}
-          />
-        </div>
+  <Button
+    label="Sign in"
+    onClick={async () => {
+      try {
+        const response = await axios.post<{
+          token: string;
+        }>(`${backendUrl}/api/user/signin`, {
+          username,
+          password,
+          role,
+        });
+
+        localStorage.setItem("token", response.data.token);
+
+        navigate(role === "user" ? "/dashboard" : "/admindashboard");
+      } catch (error: any) {
+        console.error(error);
+        alert(error?.response?.data?.message || "Signin failed. Please try again.");
+      }
+    }}
+  />
+</div>
+
 
         <div className="mt-4">
           <BottomWarning

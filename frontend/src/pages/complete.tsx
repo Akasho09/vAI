@@ -72,7 +72,7 @@ export default function ProfilePage() {
         setIsLoading(true);
         const token = localStorage.getItem("token");
         const response = await axios.get<{ user: UserProfile }>(`${backendUrl}/api/info/getme`, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `${token}` },
         });
         setFormData(response.data.user); // Initialize form fields with user data
       } catch (error) {
@@ -138,7 +138,7 @@ export default function ProfilePage() {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
           },
         }
       );

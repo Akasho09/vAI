@@ -6,9 +6,7 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-interface s {
-  token : string 
-}
+
 export const Signup = () => {
   const backendUrl : string = import.meta.env.VITE_BACKEND_URL;
   const [firstName, setFirstName] = useState("");
@@ -60,24 +58,28 @@ export const Signup = () => {
 
         <div className="mt-6">
           <Button
-            onClick={async () => {
-              try {
-                const response = await axios.post<s>(`${backendUrl}/api/user/signup`, {
-                  username,
-                  firstname: firstName,
-                  lastname: lastName,
-                  password
-                });
-                localStorage.setItem("token", response.data.token);
-                navigate("/dashboard");
-              } catch (error) {
-                console.error(error);
-                alert(error)
-              }
-            }}
-            label="Sign up"
-          />
-        </div>
+    onClick={async () => {
+      try {
+        const response = await axios.post<{
+          token: string;
+        }>(`${backendUrl}/api/user/signup`, {
+          username,
+          firstname: firstName,
+          lastname: lastName,
+          password,
+        });
+
+        localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
+      } catch (error: any) {
+        console.error(error);
+        alert(error.response?.data?.message || "Signup failed");
+      }
+    }}
+    label="Sign up"
+  />
+</div>
+
 
         <div className="mt-4">
           <BottomWarning label="Already have an account?" buttonText="Sign in" to="/signin" />

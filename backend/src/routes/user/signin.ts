@@ -48,11 +48,19 @@ export const signin = async (req: Request, res: Response): Promise<void> => {
       }
     }
 
-    const token = jwt.sign({ userId: dbuser.id }, JWT_SECRET, { expiresIn: "7d" });
+   const token = jwt.sign(
+      {  
+        userId: dbuser.id , 
+        role: role 
+      }, // or 'admin' depending on table
+      JWT_SECRET,
+      { expiresIn: '1d' }
+    );
+    
 
     res.status(200).json({
       message: "Successfully signed in",
-      token
+      token 
     });
 
   } catch (err: any) {

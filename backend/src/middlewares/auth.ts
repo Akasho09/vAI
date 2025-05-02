@@ -8,16 +8,14 @@ export interface AuthRequest extends Request {
 }
 
 export const authenticateUser = (req: AuthRequest, res: Response, next: NextFunction): void => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return ;
-  }
-
-  const token = authHeader.split(" ")[1]; // Extract token
+  const token = req.headers.authorization;
+      
+  if (!token) return;
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
-    req.userId = decoded.userId;
+     const decoded: any = jwt.verify(token, JWT_SECRET);
+     const id : string = decoded.userId;
+    req.userId = id;
     next(); 
   } catch (err) {
     return ;

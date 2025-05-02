@@ -21,7 +21,7 @@ export default function CreditHistoryPage() {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get<s>(`${backendUrl}/api/info/getcredithistory`, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `${token}` },
         });
 
         const historyFromDB: CreditHistoryEntry[] = res.data.creditHistory;
