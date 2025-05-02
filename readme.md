@@ -39,13 +39,24 @@ A modern web app for content creators to manage profiles, earn engagement credit
   - Report inappropriate items
 
 ### 📊 Dashboard Analytics
-- **User View**:
-  - Credit balance history
-  - Saved content
-  - Activity log
-- **Admin View**:
-  - User engagement metrics
-  - Content moderation tools
+
+#### User View:
+
+- Credit balance history: View a detailed history of earned credits through various interactions (e.g., likes, saves, reports).
+
+- Saved content: A list of posts saved by the user for easy access later.
+
+- Activity log: A log displaying the user’s interactions (likes, saves, reports, etc.), with timestamps.
+
+#### Admin View:
+
+- Content moderation tools: Admins can:
+
+  - View reported posts and review user-submitted content for compliance with community guidelines.
+
+  - Update user credits: Admins can manually adjust credit balances for users (e.g., adding/removing credits).
+
+  - Reward & Demerit system: Admins can reward users with additional credits for positive behavior or penalize them with credit reductions for rule violations (e.g., abuse or spamming).
 
 ## 🛠️ Tech Stack
 
