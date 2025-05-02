@@ -27,7 +27,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
-    const newUser = await prisma.admin.create({
+    const newUser = await prisma.user.create({
       data: {
         username,
         firstname,
@@ -35,8 +35,6 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
         password: hashedPassword
       },
     });
-
-
 
     await prisma.creditHistory.create({
       data: {
@@ -55,13 +53,11 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       { expiresIn: '1d' }
     );
     
-
-
     res.status(201).json({
       message: "User created successfully",
       token,
     });
-    
+
   } catch (error: any) {
     res.status(500).json({
       message: "Internal server error",

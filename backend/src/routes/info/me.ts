@@ -10,6 +10,7 @@ export const getMe = async (req: Request, res: Response) => {
 
   try {
     const decoded: any = jwt.verify(token, JWT_SECRET);
+    console.log(decoded)
     const id  = decoded.userId;
     const role =decoded.role ;
     let user;
