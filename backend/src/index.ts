@@ -12,7 +12,7 @@ const app = express();
 
 // Security and performance middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin: "https://v-ai-neon.vercel.app",
   credentials: true
 }));
 
