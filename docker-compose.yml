@@ -17,7 +17,6 @@ services:
       - ./backend/.env
     environment:
       - NODE_ENV=development  
-      - DATABASE_URL=${DATABASE_URL}
       - PORT=3000
     depends_on:
       - mongo
