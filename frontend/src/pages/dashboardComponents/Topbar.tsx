@@ -7,7 +7,7 @@ interface User {
   lastname?: string;
   avatarUrl?: string;
   Credits?: number;
-  role?: string; // <-- Add this line
+  role?: string;
 }
 
 export default function Topbar() {
@@ -29,6 +29,7 @@ export default function Topbar() {
       setUser({ ...res.data.user, role: res.data.role }); // Merge role into user
     } catch (err) {
       console.error("Error fetching user", err);
+      navigate("/signin");
     }
   };
 
