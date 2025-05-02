@@ -11,8 +11,7 @@ interface s {
 }
 export const Signup = () => {
   const backendUrl : string = import.meta.env.VITE_BACKEND_URL;
-  console.log("bend " , backendUrl)
-  console.log("bend 2" , process.env.VITE_BACKEND_URL)
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
