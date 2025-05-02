@@ -13,7 +13,8 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173',              // Local dev
-  'https://v-ai-neon.vercel.app'        // Vercel frontend
+  'https://v-ai-neon.vercel.app'  ,
+  'https://vertxxai.vercel.app'      // Vercel frontend
 ];
 
 app.use(cors({
