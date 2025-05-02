@@ -51,6 +51,8 @@ interface UserProfile {
 }
 
 export default function ProfilePage() {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  
   const navigate = useNavigate();
   const [formData, setFormData] = useState<UserProfile>({
     firstname: "",
@@ -69,7 +71,7 @@ export default function ProfilePage() {
       try {
         setIsLoading(true);
         const token = localStorage.getItem("token");
-        const response = await axios.get<{ user: UserProfile }>("http://localhost:3000/api/info/getme", {
+        const response = await axios.get<{ user: UserProfile }>(`${backendUrl}/api/info/getme`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData(response.data.user); // Initialize form fields with user data

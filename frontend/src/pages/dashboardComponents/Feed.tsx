@@ -14,6 +14,7 @@ interface Post {
 
 const Feed = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -27,7 +28,7 @@ const Feed = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:3000/api/posts/action`,
+        `${backendUrl}/api/posts/action`,
         { postId, action },
         {
           headers: {
@@ -114,5 +115,3 @@ const Feed = () => {
 };
 
 export default Feed;
-
-

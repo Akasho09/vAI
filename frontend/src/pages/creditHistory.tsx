@@ -12,6 +12,7 @@ interface s {
 }
 
 export default function CreditHistoryPage() {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [creditHistory, setCreditHistory] = useState<CreditHistoryEntry[]>([]);
   const [totalCredits, setTotalCredits] = useState<number>(0);
 
@@ -19,7 +20,7 @@ export default function CreditHistoryPage() {
     const fetchCreditHistory = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get<s>("http://localhost:3000/api/info/getcredithistory", {
+        const res = await axios.get<s>(`${backendUrl}/api/info/getcredithistory`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -14,11 +14,12 @@ export default function Topbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const avatarRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const fetchUserDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get<{user : User}>("http://localhost:3000/api/info/getme", {
+      const res = await axios.get<{user : User}>(`${backendUrl}/api/info/getme`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data.user);

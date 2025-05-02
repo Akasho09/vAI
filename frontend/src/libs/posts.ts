@@ -1,17 +1,29 @@
 import axios from "axios";
 
-export default async function getPosts() {
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+export default async function getPosts(): Promise<Post[]> {
   try {
-    const token = localStorage.getItem("token")
-    const res = await axios.get<any>("http://localhost:3000/api/posts/getposts", {
+    const token = localStorage.getItem("token");
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    if (!backendUrl) {
+      console.error("VITE_BACKEND_URL is not defined in environment variables.");
+      return [];
+    }
+
+    const res = await axios.get<{ posts: Post[] }>(`${backendUrl}/api/posts/getposts`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token || ""}`,
       },
     });
 
     return res.data.posts;
-  } catch (err) {
-    console.error("Error fetching posts from API", err);
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
     return [];
   }
 }

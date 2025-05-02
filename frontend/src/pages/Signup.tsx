@@ -10,6 +10,10 @@ interface s {
   token : string 
 }
 export const Signup = () => {
+  const backendUrl : string = import.meta.env.VITE_BACKEND_URL;
+  console.log("bend " , backendUrl)
+  console.log("bend 2" , process.env.VITE_BACKEND_URL)
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -61,7 +65,7 @@ export const Signup = () => {
           <Button
             onClick={async () => {
               try {
-                const response = await axios.post<s>("http://localhost:3000/api/user/signup", {
+                const response = await axios.post<s>(`${backendUrl}/api/user/signup`, {
                   username,
                   firstname: firstName,
                   lastname: lastName,

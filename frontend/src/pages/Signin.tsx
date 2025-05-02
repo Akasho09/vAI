@@ -12,6 +12,8 @@ interface s {
 }
 
 export const Signin = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  console.log("bend " , backendUrl)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user"); // default role
@@ -60,7 +62,7 @@ export const Signin = () => {
             label="Sign in"
             onClick={async () => {
               try {
-                const response = await axios.post<s>("http://localhost:3000/api/user/signin", {
+                const response = await axios.post<s>(`${backendUrl}/api/user/signin`, {
                   username,
                   password,
                   role
