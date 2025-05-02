@@ -13,9 +13,11 @@ services:
       - backend_node_modules:/app/node_modules
     working_dir: /app
     command: sh -c "npm run build && npm run dev"
+    env_file:
+      - ./backend/.env
     environment:
       - NODE_ENV=development  
-      - DATABASE_URL=mongodb+srv://akash:sJazfPDF1ZOHB6C2@cluster0.ku3wj.mongodb.net/vertx?retryWrites=true&w=majority&appName=Cluster0
+      - DATABASE_URL=${DATABASE_URL}
       - PORT=3000
     depends_on:
       - mongo

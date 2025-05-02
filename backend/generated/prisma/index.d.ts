@@ -9122,7 +9122,6 @@ export namespace Prisma {
 
   export type LikedPostWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId_postId?: LikedPostUserIdPostIdCompoundUniqueInput
     AND?: LikedPostWhereInput | LikedPostWhereInput[]
     OR?: LikedPostWhereInput[]
     NOT?: LikedPostWhereInput | LikedPostWhereInput[]
@@ -9130,7 +9129,7 @@ export namespace Prisma {
     postId?: StringFilter<"LikedPost"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
-  }, "id" | "userId_postId">
+  }, "id">
 
   export type LikedPostOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9171,7 +9170,6 @@ export namespace Prisma {
 
   export type SavedPostWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId_postId?: SavedPostUserIdPostIdCompoundUniqueInput
     AND?: SavedPostWhereInput | SavedPostWhereInput[]
     OR?: SavedPostWhereInput[]
     NOT?: SavedPostWhereInput | SavedPostWhereInput[]
@@ -9179,7 +9177,7 @@ export namespace Prisma {
     postId?: StringFilter<"SavedPost"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
-  }, "id" | "userId_postId">
+  }, "id">
 
   export type SavedPostOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9220,7 +9218,6 @@ export namespace Prisma {
 
   export type ReportedPostWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId_postId?: ReportedPostUserIdPostIdCompoundUniqueInput
     AND?: ReportedPostWhereInput | ReportedPostWhereInput[]
     OR?: ReportedPostWhereInput[]
     NOT?: ReportedPostWhereInput | ReportedPostWhereInput[]
@@ -9228,7 +9225,7 @@ export namespace Prisma {
     postId?: StringFilter<"ReportedPost"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
-  }, "id" | "userId_postId">
+  }, "id">
 
   export type ReportedPostOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10029,11 +10026,6 @@ export namespace Prisma {
     isNot?: PostWhereInput
   }
 
-  export type LikedPostUserIdPostIdCompoundUniqueInput = {
-    userId: string
-    postId: string
-  }
-
   export type LikedPostCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -10052,11 +10044,6 @@ export namespace Prisma {
     postId?: SortOrder
   }
 
-  export type SavedPostUserIdPostIdCompoundUniqueInput = {
-    userId: string
-    postId: string
-  }
-
   export type SavedPostCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -10073,11 +10060,6 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     postId?: SortOrder
-  }
-
-  export type ReportedPostUserIdPostIdCompoundUniqueInput = {
-    userId: string
-    postId: string
   }
 
   export type ReportedPostCountOrderByAggregateInput = {

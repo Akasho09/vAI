@@ -9,7 +9,7 @@ const DAILY_BONUS = 10;
 
 export const signin = async (req: Request, res: Response): Promise<void> => {
   const { username, password, role } = req.body;
-
+  console.log(req.body)
   if (!username || !password || !role) {
     res.status(400).json({ message: "Username, password, and role are required" });
     return;

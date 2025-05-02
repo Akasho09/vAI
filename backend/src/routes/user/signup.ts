@@ -9,7 +9,7 @@ const SALT_ROUNDS = 10;
 
 export const signup = async (req: Request, res: Response): Promise<void> => {
   const { username, firstname, lastname, password } = req.body;
-
+  console.log(req.body) 
   if (!username || !password) {
     res.status(400).json({ message: "Username and password are required." });
     return;
