@@ -3,7 +3,6 @@ import authRoutes from "./routes/user";
 import infoRouter from "./routes/info";
 import postRoutes from "./routes/posts";
 import dotenv from "dotenv";
-import path from "path";
 import cors from "cors";
 
 // Load environment variables first
@@ -22,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Remove redundant bodyParser (express.json() replaces it)
-// app.use(bodyParser.json()); // ❌ Redundant
+// app.use(bodyParser.json());
 
 // Static files with cache control
 // const staticOptions = {
