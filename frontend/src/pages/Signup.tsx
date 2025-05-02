@@ -11,8 +11,6 @@ interface s {
 }
 export const Signup = () => {
   const backendUrl : string = import.meta.env.VITE_BACKEND_URL;
-
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
