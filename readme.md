@@ -153,3 +153,15 @@ npx ts-node backend/src/utils/posts.ts
 ### DevOps
 - **Docker** – Containerization
 - **Docker Compose** – Multi-service setup
+
+
+
+## 🛠️ Admin Page Access
+To access the admin page, use the following credentials:
+
+Username: akash
+
+Password: akash
+
+
+
